@@ -9,16 +9,16 @@ using Tier.Model.Models;
 
 namespace Tier.Repository
 {
-   public class DataSoure_DbContext : DbContext
+   public class DataSoure_DbContext : IdentityDbContext<ApplicationUser>
     {
-        public DataSoure_DbContext() : base("DBConnection")
+        public DataSoure_DbContext() : base("DBConnection", throwIfV1Schema: false)
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
 
-      //  public DbSet<ApplicationUser> ApplicationUsers { set; get; }
+       // public DbSet<ApplicationUser> ApplicationUsers { set; get; }
 
-        public DbSet<Error> Errors { get; set; }
+        public DbSet<Error> Errors { set; get; }
 
         public DbSet<Footer> Footers { set; get; }
 
@@ -54,16 +54,19 @@ namespace Tier.Repository
 
         public DbSet<VisitorStatistic> VisitorStatistics { set; get; }
 
-        // public DbSet<T> Users { get; set; }
-        //public static DataSoure_DbContext Create()
-        //{
-        //    return new DataSoure_DbContext();
-        //}
 
-        //protected override void OnModelCreating(DbModelBuilder builder)
-        //{
-        //    builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
-        //    builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
-        //}
+
+        public static DataSoure_DbContext Create()
+        {
+            return new DataSoure_DbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder builder)
+        {
+
+              builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
+              builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
+        }
+
     }
 }

@@ -18,11 +18,13 @@ using Tier.Services;
 
 namespace Build_Infrastructure_ASP.NetFramework.App_Start
 {
-    public class Startup
+    public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
             ConfigAutofac(app);
+            // Register Identity
+            ConfigureAuth(app);
         }
 
         public void ConfigAutofac(IAppBuilder app)
@@ -55,6 +57,7 @@ namespace Build_Infrastructure_ASP.NetFramework.App_Start
             //Set the WebApi DependencyResolver
             GlobalConfiguration.Configuration.DependencyResolver = 
                 new AutofacWebApiDependencyResolver((IContainer)container); 
+
 
         }
     }

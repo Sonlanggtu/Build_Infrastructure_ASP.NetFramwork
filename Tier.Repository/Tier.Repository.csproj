@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201907182120102_NewDB.Designer.cs">
       <DependentUpon>201907182120102_NewDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907201727578_IdentityDB.cs" />
+    <Compile Include="Migrations\201907201727578_IdentityDB.Designer.cs">
+      <DependentUpon>201907201727578_IdentityDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -104,6 +108,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907182120102_NewDB.resx">
       <DependentUpon>201907182120102_NewDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907201727578_IdentityDB.resx">
+      <DependentUpon>201907201727578_IdentityDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
