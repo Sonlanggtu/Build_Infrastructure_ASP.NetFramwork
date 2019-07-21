@@ -12,14 +12,14 @@ namespace Build_Infrastructure_ASP.NetFramework.Mappings
     {
         public static void Configure()
         {
-
-            Mapper.CreateMap<Post, PostViewModel>();
-            Mapper.CreateMap<PostCategory, PostCategoryViewModel>();
-            Mapper.CreateMap<Tag, TagViewModel>();
-
-            Mapper.CreateMap<ProductCategory, ProductCategoryViewModel>();
-            Mapper.CreateMap<Product, ProductViewModel>();
-            Mapper.CreateMap<ProductTag, ProductTagViewModel>();
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Post, PostViewModel>();
+                cfg.CreateMap<PostCategory, PostCategoryViewModel>();
+                cfg.CreateMap<Tag, TagViewModel>();
+                cfg.CreateMap<ProductCategory, ProductCategoryViewModel>();
+                cfg.CreateMap<Product, ProductViewModel>();
+                cfg.CreateMap<ProductTag, ProductTagViewModel>();
+            });
         }
     }
 }

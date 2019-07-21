@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using Build_Infrastructure_ASP.NetFramework.Providers;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
-
+using Microsoft.Owin.Security.DataProtection;
 using Owin;
+using Tier.Model.Models;
 using Tier.Repository;
 using Tier.Repository.Infrastructure;
 using Tier.Repository.Repositories;
 using Tier.Services;
+using static Build_Infrastructure_ASP.NetFramework.App_Start.ApplicationUserManager;
 
 [assembly: OwinStartup(typeof(Build_Infrastructure_ASP.NetFramework.App_Start.Startup))]
 
@@ -42,6 +47,13 @@ namespace Build_Infrastructure_ASP.NetFramework.App_Start
             builder.RegisterAssemblyTypes(typeof(ProductCategoryService).Assembly)
                 .Where(t => t.Name.EndsWith("Service")).AsImplementedInterfaces()
                 .InstancePerRequest();
+
+            //Asp.net Identity
+       //     builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
+            builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
             // Register Repository
             builder.RegisterAssemblyTypes(typeof(ProductCategoryRepository).Assembly)
